@@ -102,11 +102,6 @@
 				\item BLC: buffer letture centraline.
 			\end{itemize}
 		\end{block}
-		\begin{block}{Basi di dati}
-			\begin{itemize}
-				\item BDCE: basi di dati sistema gestione centraline
-			\end{itemize}
-		\end{block}
 	\end{frame}
 
 	\section{Architettura del problema}\label{arch_problema}
@@ -273,7 +268,9 @@
 	\begin{frame}
 		\subsubsection{Gestore interventi}	
 		\begin{block}{Gestore interventi}
-			\includegraphics[width=\textwidth, height=0.85\textheight, keepaspectratio=true]{comp3.png}
+			\begin{center}
+				\includegraphics[width=\textwidth, height=0.85\textheight, keepaspectratio=true]{comp3.png}
+			\end{center}
 		\end{block}
 	\end{frame}	
 	
@@ -285,7 +282,8 @@
 	\end{frame}	
 	
 	\subsubsection{Dimensioni statiche}
-		\begin{frame}[allowframebreaks]
+	
+	\begin{frame}[allowframebreaks]
 		\frametitle{Dimensioni statiche}			
 		\begin{center}
 			\begin{table}
@@ -353,7 +351,7 @@
 						\begin{itemize}
 							\item Gestore acquisizione dati centralina : omogenea (la centralina è l' unica location)
 							\item Gestore guasti:  omogenea (la sede centrale unica location )
-							\item Gestore interventi: il gestore degli interventi è eterogeneo: coinvolge sia la sede centrale che potenzialmente un qualcunque punto nell'area gestita dal GEC
+							\item Gestore interventi: il gestore degli interventi è eterogeneo: coinvolge sia la sede centrale che potenzialmente un qualunque punto nell'area gestita dal GEC
 							\item Gestore politiche di distribuzione:  omogenea (unica location)
 						\end{itemize} \\
 						\hline
@@ -389,14 +387,122 @@
 						Extra flows & 35 & I componenti interagiscono a livello medio con i vari attori.
 						\begin{itemize}
 							\item Gestore acquisizione dati centralina : un'istanza per centralina comunica con la centralina
-							\item Gestore guasti: Ogni istanza del gestore guasti comunica con una centralina e con il BDCE
+							\item Gestore guasti: Ogni istanza del gestore guasti comunica con una centralina.
 							\item Gestore interventi: Ogni istanza del gestore interventi comunica con l'operatore e con il servizio tecnico centrale.
-							\item Gestore politiche di distribuzione: interagisce solo con il BDCE
+							\item Gestore politiche di distribuzione: non interagisce con altri attori.
 						\end{itemize} \\
 						\hline
 				\end{tabular}}
 			\end{table}
 		\end{center}
+		\pagebreak
+		\begin{center}
+			\begin{table}
+				\tiny
+				\centering
+				{\renewcommand{\arraystretch}{1.2}
+					\begin{tabular}{|M{0.1\textwidth}|M{0.1\textwidth}|p{.6\textwidth}|}
+						\hline
+						\rowcolor{intestazione}
+						Dimensione & Valore & Commenti \\
+						\hline
+						\rowcolor{riga1}
+						Sharing & 50 & Il valore dello sharing è medio/alto: diverse componenti condividono informazioni su letture o guasti.
+						\begin{itemize}
+							\item Gestore acquisizione dati centralina : un'istanza per centralina condivide i dati con il gestore dei guasti e con il gestore delle politiche di distribuzione.
+							\item Gestore guasti: ogni istanza condivide i valori delle letture con il gestore delle poitiche di distribuzione 
+							\item Gestore interventi: ogni istanza del gestore interventi condivide il dato relativo al guasto con un'istanza del gestore guasti.
+							\item Gestore politiche di distribuzione: condivide le informazioni delle letture con il gestore acquisizione dati centralina e con il gestore dei guasti
+						\end{itemize} \\
+						\rowcolor{riga2}
+						Control flows  & 0 & I componenti non hanno interazioni dal punto di vista del flusso di controllo. \\
+						\hline
+				\end{tabular}}
+			\end{table}
+		\end{center}	
+	\end{frame}
+	
+	\subsubsection{Footprint}
+	\begin{frame}{Footprint}
+		\begin{center}
+			\includegraphics[width=0.75\textwidth, height=0.75\textheight, keepaspectratio=true]{part_funz.png}
+		\end{center}
+	\end{frame}
+
+	\subsection{Partizionamento per complessità}\label{part_compl}
+	\begin{frame}
+		\frametitle{\nameref{part_compl}}
+		\begin{block}{\nameref{part_compl}}
+			\begin{enumerate}
+				\item Low
+				\begin{itemize}
+					\item ADUC1
+					\item ADUC5
+					\item ADUC6
+					\item ADUC7
+				\end{itemize}
+				\item Medium
+				\begin{itemize}
+					\item ADUC2
+					\item ADUC3
+					\item ADUC4
+				\end{itemize}
+			\end{enumerate}
+		\end{block}
+	\end{frame}
+
+	\begin{frame}
+		\subsubsection{Gestore attività low}	
+		\begin{block}{Gestore attività low}
+			\begin{center}
+				\includegraphics[width=\textwidth, height=0.85\textheight, keepaspectratio=true]{comp5.png}
+			\end{center}
+		\end{block}
+	\end{frame}	
+	
+	\begin{frame}
+		\subsubsection{Gestore attività medium}	
+		\begin{block}{Gestore attività medium}
+			\begin{center}
+				\includegraphics[width=\textwidth, height=0.85\textheight, keepaspectratio=true]{comp6.png}
+			\end{center}
+		\end{block}
+	\end{frame}	
+
+	\subsubsection{Dimensioni statiche}
+		\begin{frame}[allowframebreaks]
+		\frametitle{Dimensioni statiche}			
+		\begin{center}
+			\begin{table}
+				\tiny
+				\centering
+				{\renewcommand{\arraystretch}{1.2}
+					
+					\begin{tabular}{|M{0.1\textwidth}|M{0.1\textwidth}|p{.6\textwidth}|}
+						\hline
+						\rowcolor{intestazione}
+						Dimensione & Valore & Commenti \\
+						\hline
+						\rowcolor{riga1}
+						Complexity & 0 & Per costruzione le complessità delle attività nelle componenti sono omogenee. \\
+						\rowcolor{riga2}
+						Frequency & 50 & La frequenza è molto eterogenea nelle componenti: nelle attività low abbiamo una variazione da più volte al secondo a una volta alla settimana.
+						\begin{itemize}
+							\item Gestore attività low: 10/s, 10/giorno, 50/giorno, 1/settimana.
+							\item Gestore attività medium: 1/s, 10/giorno.
+						\end{itemize} \\
+						\rowcolor{riga1}
+						Delay & 50 & Il delay è molto eterogeneo nelle componenti: nelle attività low abbiamo una variazione da un secondo a 12 ore.
+						\begin{itemize}
+							\item Gestore attività low: 1s, 5 minuti, 5 minuti, 12 ore.
+							\item Gestore attività medium: 1s, 5 secondi, 5 minuti.
+						\end{itemize} \\
+						\hline
+				\end{tabular}}
+			\end{table}
+		\end{center}
+		
+		\pagebreak
 		
 		\begin{center}
 			\begin{table}
@@ -410,30 +516,113 @@
 						Dimensione & Valore & Commenti \\
 						\hline
 						\rowcolor{riga1}
-						Sharing & 50 & Il valore dello sharing è medio/alto :diverse componenti condividono informazioni su letture o guasti.
+						Abstraction & 45 & Entrambe le componenti interagiscono con diversi tipi di dato, portando ad un livello medio di Abstraction.
 						\begin{itemize}
-							\item Gestore acquisizione dati centralina : un'istanza per centralina condivide i dati con il gestore dei guasti e con il gestore delle politiche di distribuzione.
-							\item Gestore guasti: ogni istanza condivide i valori delle letture con il gestore delle poitiche di distribuzione 
-							\item Gestore interventi: ogni istanza del gestore interventi condivide il dato relativo al guasto con un'istanza del gestore guasti.
-							\item Gestore politiche di distribuzione: condivide le informazioni delle letture con il gestore acquisizione dati centralina e con il gestore dei guasti
+							\item Gestore attività low: Intervento, Tecnico, Lettura, Politica di distribuzione
+							\item Gestore attività medium: Centralina, Lettura, Guasto, Intervento
 						\end{itemize} \\
 						\rowcolor{riga2}
-						Control flows  & 10 & Il valore dell'interferenza è basso: l'unica possibile interaezione è fra il gestore dei guasti e il gestore degli interventi in caso avvenga effettivamente un guasto.
+						Location & 50 & Anche la location risulta essere eterogenea nelle componenti. 
 						\begin{itemize}
-							\item Gestore acquisizione dati centralina : ciascuna istanza non interagisce con altre istanze di altri componenti.
-							\item Gestore guasti:  ciascuna istanza può interagire con il gestore degli interventi.
-							\item Gestore interventi: ogni istanza interagisce con il gestore dei guasti.
-							\item Gestore politiche di distribuzione: 
-							l'unica istanza non interagisce con altre comopnenti.
+							\item Gestore attività low: Centralina, Sede Centrale, qualunque punto nell'area gestita dal GEC
+							\item Gestore attività medium: Qualunque punto nell'area gestita dal GEC
 						\end{itemize} \\
 						\hline
 				\end{tabular}}
 			\end{table}
 		\end{center}	
 	\end{frame}
-
-	\subsubsection{Footprint}
-	\begin{frame}
+	
+	\subsubsection{Dimensioni dinamiche}
+	\begin{frame}[allowframebreaks]
+		\frametitle{Dimensioni dinamiche}			
+		\begin{center}
+			\begin{table}
+				\tiny
+				\centering
+				{\renewcommand{\arraystretch}{1.2}
+					
+					\begin{tabular}{|M{0.1\textwidth}|M{0.1\textwidth}|p{.6\textwidth}|}
+						\hline
+						\rowcolor{intestazione}
+						Dimensione & Valore & Commenti \\
+						\hline
+						\rowcolor{riga1}
+						Intra Flows & 0 & Le due componenti non interagiscono fra di loro. \\
+						\rowcolor{riga2}
+						Extra flows & 50 & I componenti interagiscono a livello medio/alto con i vari attori, con anche alcune sovrapposizioni (per quanto riguarda la centralina, operatore).
+						\begin{itemize}
+							\item Gestore attività low: Centralina, Operatore
+							\item Gestore attività medium: Centralina, Operatore, servizio tecnico centrale
+						\end{itemize} \\
+						\hline
+				\end{tabular}}
+			\end{table}
+		\end{center}
+	
+		
+		\begin{center}
+			\begin{table}
+				\tiny
+				\centering
+				{\renewcommand{\arraystretch}{1.2}
+					\begin{tabular}{|M{0.1\textwidth}|M{0.1\textwidth}|p{.6\textwidth}|}
+						\hline
+						\rowcolor{intestazione}
+						Dimensione & Valore & Commenti \\
+						\hline
+						\rowcolor{riga1}
+						Sharing & 60 & Il partizionamento per complessità porta ad un alto valore di sharing, le due componenti condividono la maggior parte dei  dati.
+						Le informazioni riguardo le centraline, gli interventi i tecnici e le letture sono condivise fra le due componenti.\\
+						\rowcolor{riga2}
+						Control flows  & 0 & I componenti non hanno interazioni dal punto di vista del flusso di controllo.\\
+						\hline
+				\end{tabular}}
+			\end{table}
+		\end{center}
+		
 	\end{frame}
+	
+	\subsubsection{Footprint}
+	\begin{frame}{Footprint}
+		\begin{center}
+			\includegraphics[width=0.75\textwidth, height=0.75\textheight, keepaspectratio=true]{part_comp.png}
+		\end{center}
+	\end{frame}
+
+	\subsection{Confronto tra i partizionamenti}
+	\begin{frame}{Confronto tra i partizionamenti}
+		  \begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{block}{Le footprint a confronto}
+					\begin{tiny}
+						Dal confronto fra le footprint dei partizionamenti notiamo che il partizionamento per funzionalità ha un area minore rispetto al partizionamento per complessità; \\
+						Inoltre le misure in cui eccelle il partizionamento per complessità sono una conseguenza dell'avere poche componenti (es. è ovvio che in un partizionamento per complessità sia ottimo lo spread per la complessità), mentre il partizionamento per funzionalità risulta essere più bilanciato nelle varie metriche.
+					\end{tiny}
+				\end{block}
+			\begin{block}{Scelta del partizionamento}
+				Per via dell'area minore e del migliore bilanciamento utilizzeremo quindi il partizionamento per funzionalità nella progettazione dell'architettura concreta.
+			\end{block}
+			\end{column}
+			\begin{column}{0.5\textwidth}
+				\begin{center}
+					\includegraphics[width=0.75\textwidth, height=0.75\textheight, keepaspectratio=true]{part_confronto.png}
+				\end{center}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	
+	\section{Architettura concreta}
+	
+	\subsection{Diagramma delle classi}
+	
+\begin{frame}
+	\frametitle{Diagramma delle classi}
+		\begin{center}
+		\includegraphics[width=0.75\textwidth, height=0.75\textheight, keepaspectratio=true]{diagramma_classi.png}
+	\end{center}
+\end{frame}
+
+\subsection{Diagramma delle classi}
 
 \end{document}
