@@ -12,7 +12,6 @@
 \usepackage[utf8]{inputenc} 
 \usepackage[T1]{fontenc}
 \usepackage[upright]{fourier} 
-\usepackage[usenames,dvipsnames]{xcolor}
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 \newcommand{\centered}[1]{\begin{tabular}{l} #1 \end{tabular}}
@@ -311,14 +310,24 @@
 						Frequency & 25 & La componente per la gestione dei Guasti è quella che ha un maggiore impatto sull'uniformità delle frequenze perchè è composta da un'attività molto frequente (rilevazione delle anomalie) e da una con una frequenza molto più bassa (gestione del guasto)
 						\begin{itemize}
 							\item Gestore acquisizione dati centralina : omogenea (unica frequenza)
-							\item Gestore guasti: eterogenee, da ina volta al secondo a poche volte al giorno
+							\item Gestore guasti: eterogenee, da una volta al secondo a poche volte al giorno
 							\item Gestore interventi: omogenee, nell'ordine della decina di volte al giorno
 							\item Gestore politiche di distribuzione:  omogenea (unica frequenza)
+						\end{itemize} \\
+						\rowcolor{riga1}
+						Delay & 10 & I delay delle attività nelle componenti sono omogenei:
+						\begin{itemize}
+							\item Gestore acquisizione dati centralina : omogeneo (unico delay)
+							\item Gestore guasti: omogeneo, delay nell'ordine dei secondi
+							\item Gestore interventi: omogeneo, delay nell'ordine dei minuti
+							\item Gestore politiche di distribuzione: omogeneo (unico delay)
 						\end{itemize} \\
 						\hline
 				\end{tabular}}
 			\end{table}
 		\end{center}
+	
+	
 	
 		\begin{center}
 			\begin{table}
