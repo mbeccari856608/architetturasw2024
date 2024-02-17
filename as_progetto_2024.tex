@@ -614,15 +614,60 @@
 	
 	\section{Architettura concreta}
 	
-	\subsection{Diagramma delle classi}
+	\subsection{Diagrammi di sequenza}
 	
 \begin{frame}
-	\frametitle{Diagramma delle classi}
+	\frametitle{Diagrammi delle classi}
 		\begin{center}
-		\includegraphics[width=0.75\textwidth, height=0.75\textheight, keepaspectratio=true]{diagramma_classi.png}
+			\includegraphics[width=0.75\textwidth, height=0.75\textheight, keepaspectratio=true]{diagramma_classi.png}
+		\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Diagrammi di sequenza}
+	\begin{center}
+		\begin{block}{Nota sui datastore}
+			Per semplificare i diagrammi di sequenza le interazioni con i datastore vengono considerate incluse nelle operazioni
+			\textit{crea}, \textit{modifica}, \textit{salva}
+		\end{block}
 	\end{center}
 \end{frame}
 
-\subsection{Diagramma delle classi}
+\begin{frame}
+	\subsubsection{Componente acquisizione dati}
+	\frametitle{Componente acquisizione dati}
+		\begin{center}
+			\includegraphics[width=0.75\textwidth, height=0.75\textheight, keepaspectratio=true]{acquisizione_dati.png}
+		\end{center}
+\end{frame}
+
+\begin{frame}
+	\subsubsection{Componente gestione guasti}
+	\frametitle{Componente gestione guasti}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth, height=0.75\textheight, keepaspectratio=true]{gestione_guasti.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+	\subsubsection{Componente gestione interventi}
+	\frametitle{Componente gestione interventi}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth, height=0.75\textheight, keepaspectratio=true]{gestione_interventi_1.png}
+	\end{center}
+	\pagebreak
+		\begin{center}
+		\includegraphics[width=0.75\textwidth, height=0.75\textheight, keepaspectratio=true]{gestione_interventi_2.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\subsubsection{Componente gestione politiche distribuzione}
+	\frametitle{Componente gestione politiche distribuzione}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth, height=0.75\textheight, keepaspectratio=true]{gestione_pol_distr.png}
+	\end{center}
+\end{frame}
+
 
 \end{document}
